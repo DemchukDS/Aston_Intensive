@@ -17,7 +17,7 @@ public class Main {
         list.removeByIndex(2);
         System.out.println("Список после remove по индексу: " + list);
 
-        list.removeByVolume(Integer.valueOf(5));
+        list.removeByValue(Integer.valueOf(5));
         System.out.println("Список после remove по элементу: " + list);
 
         list.sort(Integer::compareTo);
