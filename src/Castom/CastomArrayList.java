@@ -3,6 +3,7 @@ package Castom;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Comparator;
+import java.util.List;
 
 public class CastomArrayList<T> {
 
@@ -53,7 +54,16 @@ public class CastomArrayList<T> {
 
     public T removeByIndex(int i) {
         T removedElement = (T) array[i];
-        System.arraycopy(array, i + 1, array, i, size - i - 1);
+        Object[] tempArray = new Object[array.length - 1];
+        //System.arraycopy(array, i + 1, array, i, size - i - 1);
+        for (int j = 0; j < i; j++) {
+            tempArray[j] = array[j];
+        }
+        for (int j = i; j < array.length - 1; j++) {
+            tempArray[j] = array[j + 1];
+        }
+        array = tempArray;
+        size--;
         return removedElement;
     }
 
