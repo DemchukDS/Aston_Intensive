@@ -59,7 +59,7 @@ public class CastomArrayList<T> {
         for (int j = 0; j < i; j++) {
             tempArray[j] = array[j];
         }
-        for (int j = i; j < array.length - 1; j++) {
+        for (int j = i; j < array.length - 1; j++) {`
             tempArray[j] = array[j + 1];
         }
         array = tempArray;
