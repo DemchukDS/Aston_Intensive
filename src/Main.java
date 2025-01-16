@@ -1,6 +1,7 @@
 import Castom.CastomArrayList;
 import StreamTraining.Employee;
 import StreamTraining.RandomNumber;
+import StreamTraining.Salary;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -119,5 +120,37 @@ public class Main {
             ).toList();
 
         System.out.println(l2Players);
+
+        Map<String, String> currencySymbolsByIsoCode = new HashMap<>();
+            currencySymbolsByIsoCode.put("EUR", "€");
+            currencySymbolsByIsoCode.put("INR", "₹");
+            currencySymbolsByIsoCode.put("JPY", "¥");
+            currencySymbolsByIsoCode.put("USD", "$");
+
+        Map<String, Double> coefficientByIsoCode = new HashMap<>();
+            coefficientByIsoCode.put("USD", 1.00d);
+            coefficientByIsoCode.put("INR", 86.50d);
+            coefficientByIsoCode.put("EUR", 0.97d);
+            coefficientByIsoCode.put("JPY", 158.04d);
+
+        List<Salary> salaryList = new ArrayList<>();
+        salaryList.add(new Salary(367.97d, "USD"));
+        salaryList.add(new Salary(221.78d, "EUR"));
+        salaryList.add(new Salary(8000.44d, "INR"));
+        salaryList.add(new Salary(300000.29d, "JPY"));
+        salaryList.add(new Salary(1900.56d, "USD"));
+        salaryList.add(new Salary(287220.81d, "JPY"));
+        salaryList.add(new Salary(875.6d, "EUR"));
+
+        // мап ключ USD, значение $. (для валют). Масив объектов salery. 2 поля (double, string валюта)
+        // Из массива отобразить $ - зпшка. Оставить те зп, которые по курсу больше 1000$
+
+        salaryList.stream()
+            .filter(element -> element.getSalary() / coefficientByIsoCode.get(element.getCurrensy()) > 1000)
+            .map(element -> "salary " + element.getSalary() + " " + currencySymbolsByIsoCode.get(element.getCurrensy()) +
+                (element.getCurrensy().equals("USD")
+                    ? ""
+                    : " - " + (element.getSalary() / coefficientByIsoCode.get(element.getCurrensy()) + " $")))
+            .forEach(System.out::println);
     }
 }
